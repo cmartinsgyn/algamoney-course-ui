@@ -1,6 +1,7 @@
 <div class=container>
   <div class="ui-g">
-   <div class="ui-g-12">
+
+    <div class="ui-g-12">
      <h1>Lancamentos</h1>
    </div>
 
@@ -16,10 +17,14 @@
        <label>Ate</label>
        <input type="text" pInputText>
    </div>
+
    <div class="ui-g-12">
      <button pButton type="submit" label="Pesquisar"></button>
+  </div>
+
  </div>
-         <!-- <ul>
+
+ <!-- <ul>
                <li *ngFor="let l of lancamentos">
                  {{l.pessoa}}
                </li>
@@ -36,7 +41,7 @@
              <p-column field="valor" header="Valor" styleClass="col-valor">
                <ng-template let-lanc="rowData" pTemplate="body">
                  <!-- <span [ngStyle]="{color: lanc.tipo === 'DESPESA' ? 'red': 'blue'}">{{lanc.valor}}</span> -->
-                 <span [style.color]="lanc.tipo === 'DESPESA' ? 'red': 'blue'">{{lanc.valor | currency:'BRL':true:'1.2-2]'}}</span>
+                 <span [style.color]="lanc.tipo === 'DESPESA' ? 'red': 'blue'">{{lanc.valor}}</span>
                </ng-template>
              </p-column>
              <p-column styleClass="colAcoes">
@@ -52,11 +57,7 @@
      <div class="ui-g-12">
          <a><button pButton label="Novo Lançamento"></button></a>
      </div>
-   </div>
 
+    </div>
 
-
-
-
-
- </div>
+  </div>
