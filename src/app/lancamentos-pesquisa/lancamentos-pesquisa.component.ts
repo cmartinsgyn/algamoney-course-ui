@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LancamentosPesquisaComponent {
   lancamentos = [
     { tipo: 'DESPESA', descricao: 'Compra de pão', dataVencimento: new Date(),
-      dataPagamento: null, valor: 4.55, pessoa: 'Padaria do José' },
+      dataPagamento: new Date(), valor: 4.55, pessoa: 'Padaria do José' },
     { tipo: 'RECEITA', descricao: 'Venda de software', dataVencimento: '10/06/2017',
       dataPagamento: '09/06/2017', valor: 80000, pessoa: 'Atacado Brasil' },
     { tipo: 'DESPESA', descricao: 'Impostos', dataVencimento: '20/07/2017',
