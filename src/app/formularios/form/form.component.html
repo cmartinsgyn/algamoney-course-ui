@@ -13,10 +13,10 @@
 
     <div class="form-group">
         <label class="form-control-label">Profissão</label>
-        <select class="form-control" name="profissao" ngModel>
+        <select class="form-control" name="profissao" [ngModel]="profissao">
           <option value="">Selecione a Profissão</option>
-          <option *ngFor="let profissao of profissoes" [value]="profissao">
-          {{ profissao }}></option>
+          <option *ngFor="let profissao of profissoes"
+          [value]="profissao">{{ profissao }}</option>
 
         </select>
     </div>
