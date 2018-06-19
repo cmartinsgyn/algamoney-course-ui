@@ -3,17 +3,20 @@
   <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
     <div class="form-group">
       <label class="form-control-label">Nome</label>
-      <input type="text" class="form-control" name="nome" ngModel >
+      <input type="text" class="form-control" name="nome"
+      [(ngModel)]="cliente.nome" >
     </div>
 
     <div class="form-group">
         <label class="form-control-label">E-mail</label>
-        <input type="text" class="form-control" name="email" ngModel>
+        <input type="text" class="form-control" name="email"
+        [(ngModel)]="cliente.email">
     </div>
 
     <div class="form-group">
         <label class="form-control-label">Profissão</label>
-        <select class="form-control" name="profissao" [ngModel]="profissao">
+        <select class="form-control" name="profissao"
+        [(ngModel)]="cliente.profissao">
           <option value="">Selecione a Profissão</option>
           <option *ngFor="let profissao of profissoes"
           [value]="profissao">{{ profissao }}</option>
@@ -21,6 +24,7 @@
         </select>
     </div>
    <button type="submit" class="btn btn-primary">Salvar</button>
-
   </form>
+
+{{ cliente | json }}
 </div>
