@@ -20,11 +20,11 @@ export class FormComponent {
   profissao = 'Outra';
 
   salvar(form: NgForm) {
-    //this.cliente.nome = form.value.nome;
-    //this.cliente.email = form.value.email;
-   // this.cliente.profissao = form.value.profissao;
+    // this.cliente.nome = form.value.nome;
+    // this.cliente.email = form.value.email;
+    // this.cliente.profissao = form.value.profissao;
 
-     console.log(form.value);
+     console.log(form);
      console.log(this.cliente);
   }
 
