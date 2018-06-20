@@ -3,25 +3,28 @@
     Preencha todos os campos corretamente
   </div>
   <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
-    <div class="form-group">
+
+    <div class="form-group" [class.has-danger]="nome.invalid && nome.touched">
       <label class="form-control-label">Nome</label>
       <input type="text" class="form-control" name="nome"
       [(ngModel)]="cliente.nome" required minlength="10" #nome="ngModel">
-
-      <div *ngIf="nome.hasError('required') && nome.touched">Informe um nome</div>
-      <div *ngIf="nome.hasError('minlength')">O nome deve ter pelo menos 10 letras</div>
+        <div *ngIf="nome.hasError('required') && nome.touched" class="form-control-feedback">
+          Informe um nome</div>
+        <div *ngIf="nome.hasError('minlength')" class="form-control-feedback">
+          O nome deve ter pelo menos 10 letras</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-danger]="email.invalid && email.touched">
         <label class="form-control-label">E-mail</label>
         <input type="text" class="form-control" name="email"
         [(ngModel)]="cliente.email" email #email="ngModel">
 
-        <div *ngIf="email.invalid && email.touched">Informe um e-mail correto</div>
+        <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+          Informe um e-mail correto</div>
 
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-danger]="profissao.invalid && profissao.touched">
         <label class="form-control-label">Profissão</label>
         <select class="form-control" name="profissao"
         [(ngModel)]="cliente.profissao" required #prof="ngModel">
@@ -31,7 +34,8 @@
 
         </select>
 
-        <div *ngIf="prof.invalid && profissao.touched">Informe uma profissão</div>
+        <div *ngIf="prof.invalid && profissao.touched" class="form-control-feedback">
+          Informe uma profissão</div>
     </div>
    <button type="submit" class="btn btn-primary"
    [disabled]="!usuarioForm.valid">Salvar</button>
