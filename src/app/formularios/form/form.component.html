@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="usuarioForm.invalid" class="alert alert-danger">
+  <div *ngIf="usuarioForm.invalid && usuarioForm.dirty" class="alert alert-danger">
     Preencha todos os campos corretamente
   </div>
   <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
@@ -8,7 +8,7 @@
       <input type="text" class="form-control" name="nome"
       [(ngModel)]="cliente.nome" required minlength="10" #nome="ngModel">
 
-      <div *ngIf="nome.hasError('required')">Informe um nome</div>
+      <div *ngIf="nome.hasError('required') && nome.touched">Informe um nome</div>
       <div *ngIf="nome.hasError('minlength')">O nome deve ter pelo menos 10 letras</div>
     </div>
 
@@ -17,7 +17,7 @@
         <input type="text" class="form-control" name="email"
         [(ngModel)]="cliente.email" email #email="ngModel">
 
-        <div *ngIf="email.invalid">Informe um e-mail correto</div>
+        <div *ngIf="email.invalid && email.touched">Informe um e-mail correto</div>
 
     </div>
 
@@ -31,7 +31,7 @@
 
         </select>
 
-        <div *ngIf="prof.invalid">Informe uma profissão</div>
+        <div *ngIf="prof.invalid && profissao.touched">Informe uma profissão</div>
     </div>
    <button type="submit" class="btn btn-primary"
    [disabled]="!usuarioForm.valid">Salvar</button>
