@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 class Cliente {
-nome: string;
-email: string;
-profissao: string;
+  nome: string;
+  email: string;
+  profissao: '';
 }
 
 @Component({
@@ -20,13 +20,15 @@ export class FormComponent {
   profissao = 'Outra';
 
   salvar(form: NgForm) {
-    // this.cliente.nome = form.value.nome;
-    // this.cliente.email = form.value.email;
-    // this.cliente.profissao = form.value.profissao;
-
      console.log(form);
      console.log(this.cliente);
+
+     form.reset({ profissao: '' });
   }
 
 }
+
+ // this.cliente.nome = form.value.nome;
+ // this.cliente.email = form.value.email;
+ // this.cliente.profissao = form.value.profissao;
 
