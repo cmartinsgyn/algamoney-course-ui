@@ -49,5 +49,16 @@ label {
   text-align: center;
 }
 
+/* personaliza todas as mensagens dos campos */
+.ui-messages-error{
+  margin: 0px;
+  margin-top: 4px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 0px 5px;
+
+}
+
 
 
