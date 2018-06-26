@@ -1,0 +1,31 @@
+<div class="container">
+  <form>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Nova Pessoa</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome {{ nome.errors | json }}</label>
+        <input type="text" pInputText name="nome" ngModel #nome="ngModel" required minlength="5">
+
+        <app-message [control]="nome" error="required"
+         text="Ops! Falta o nome da pessoa."></app-message>
+
+         <app-message [control]="nome" error="minlength"
+            text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres!"></app-message>
+      </div>
+      
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info"></button>
+        <a href="javascript:;">Voltar para a pesquisa</a>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</div>
