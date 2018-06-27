@@ -12,11 +12,34 @@
 
         <app-message [control]="nome" error="required"
          text="Ops! Falta o nome da pessoa."></app-message>
-
          <app-message [control]="nome" error="minlength"
             text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres!"></app-message>
       </div>
-      
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Logradouro</label>
+        <input type="text" pInputText name="logradouro" ngModel #logradouro="ngModel"
+        required minlength="5">
+
+        <app-message [control]="logradouro" error="required"
+        text="Ops!Falta o logradouro!"></app-message>
+
+        <app-message [control]="logradouro" error="minlength"
+        text="Minimo de {{ logradouro.errors?.minlength?.requiredLength }}"></app-message>
+      </div>
+
+      <div class="ui-g-3 ui-md-3 ui-fluid">
+          <label>Numero</label>
+          <input type="text" pInputText name="numero" ngModel #numero="ngModel"
+          required minlength="5">
+
+          <app-message [control]="numero" error="required"
+          text="Ops!Falta o logradouro!"></app-message>
+
+          <app-message [control]="numero" error="minlength"
+          text="Minimo de {{ numero.errors?.minlength?.requiredLength }}"></app-message>
+        </div>
+
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar"></button>
         <button pButton type="button" label="Novo" class="ui-button-info"></button>
