@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form #pessoaForm="ngForm" (ngSubmit)="salvar(pessoaForm)">
 
     <div class="ui-g">
       <div class="ui-g-12">
@@ -8,7 +8,7 @@
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome {{ nome.errors | json }}</label>
-        <input type="text" pInputText name="nome" ngModel #nome="ngModel" required minlength="5">
+        <input type="text" pInputText name="nome"(ngModel)="nome" #nome="ngModel" required minlength="5">
 
         <app-message [control]="nome" error="required"
          text="Ops! Falta o nome da pessoa."></app-message>
@@ -16,7 +16,7 @@
             text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres!"></app-message>
       </div>
 
-      <div class="ui-g-12 ui-md-9 ui-fluid">
+      <div class="ui-g-9 ui-fluid">
         <label>Logradouro</label>
         <input type="text" pInputText name="logradouro" ngModel #logradouro="ngModel"
         required minlength="5">
@@ -28,20 +28,68 @@
         text="Minimo de {{ logradouro.errors?.minlength?.requiredLength }}"></app-message>
       </div>
 
-      <div class="ui-g-3 ui-md-3 ui-fluid">
+      <div class="ui-g-3 ui-fluid">
           <label>Numero</label>
           <input type="text" pInputText name="numero" ngModel #numero="ngModel"
-          required minlength="5">
+          required>
 
           <app-message [control]="numero" error="required"
-          text="Ops!Falta o logradouro!"></app-message>
-
-          <app-message [control]="numero" error="minlength"
-          text="Minimo de {{ numero.errors?.minlength?.requiredLength }}"></app-message>
+          text="Ops! Falta o logradouro!"></app-message>
         </div>
 
+        <div class="ui-g-4 ui-fluid">
+          <label>Complemento</label>
+          <input type="text" pInputText name="complemento" ngModel #complemento="ngModel"
+           minlength="5">
+
+          <app-message [control]="complemento" error="minlength"
+          text="Minimo de {{ complemento.errors?.minlength?.requiredLength }} caracteres"></app-message>
+        </div>
+
+        <div class="ui-g-4 ui-fluid">
+            <label>Bairro</label>
+            <input type="text" pInputText name="bairro" ngModel #bairro="ngModel"
+            required minlength="2">
+
+            <app-message [control]="bairro" error="required"
+            text="Ops! Falta o Bairro!"></app-message>
+
+            <app-message [control]="bairro" error="minlength"
+            text="Minimo de {{ bairro.errors?.minlength?.requiredLength }} caracteres"></app-message>
+          </div>
+
+          <div class="ui-g-4 ui-fluid">
+            <label for="cep">CEP</label>
+            <input type="text" pInputText name="cep" ngModel #cep="ngModel" required>
+
+            <app-message [control]="cep" error="required"
+            text="Ops! Falta o CEP"></app-message>
+          </div>
+
+          <div class="ui-g-6 ui-fluid">Selecione
+
+              <label>Cidade</label>
+              <input type="text" pInputText name="cidade" ngModel #cidade="ngModel"
+              required minlength="2">
+
+              <app-message [control]="cidade" error="required"
+              text="Ops! Falta a cidade!"></app-message>
+
+              <app-message [control]="cidade" error="minlength"
+              text="Minimo de {{ cidade.errors?.minlength?.requiredLength }} caracteres"></app-message>
+          </div>
+          <div class="ui-g-6 ui-fluid">
+              <label>Estado {{ uf.value }}</label>
+              <p-dropdown [options]="estados" [autoWidth]="false" [filter]="true"
+              placeholder="Selecione" ngModel #uf="ngModel" name="uf" required>Estados</p-dropdown>
+
+              <app-message [control]="uf" error="required"
+              text="Ops! Falta o Estado!"></app-message>
+          </div>
+
+
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" [disabled]="!pessoaForm.valid" label="Salvar"></button>
         <button pButton type="button" label="Novo" class="ui-button-info"></button>
         <a href="javascript:;">Voltar para a pesquisa</a>
       </div>
