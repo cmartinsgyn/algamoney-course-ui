@@ -1,3 +1,4 @@
+import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -18,42 +19,39 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
-import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
 import { MessageComponent } from './message/message.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    LancamentosPesquisaComponent,
     NavbarComponent,
     PessoasPesquisaComponent,
     FormComponent,
-    LancamentoCadastroComponent,
     MessageComponent,
     PessoaCadastroComponent,
-    PessoasGridComponent
+    PessoasGridComponent,
   ],
   imports: [
     BrowserModule,
-    InputTextModule,
     AlertModule.forRoot(),
     MatInputModule,
     BrowserAnimationsModule,
+    FormsModule,
+
+    InputTextModule,
     ButtonModule,
     DataTableModule,
     TooltipModule,
-    FormsModule,
     InputTextareaModule,
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    CurrencyMaskModule
+
+    LancamentosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

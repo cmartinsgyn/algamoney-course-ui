@@ -1,3 +1,22 @@
-<p>
-  pessoas-grid works!
-</p>
+<p-dataTable [value]="pessoas" [paginator]="true" [rows]="3"
+[rowsPerPageOptions]="[5,20,30]" [responsive]="true">
+  <p-column field="nome" header="Nome"></p-column>
+  <p-column field="cidade" header="Cidade"></p-column>
+  <p-column field="estado" header="Estado"></p-column>
+  <p-column field="status" header="Status">
+  <ng-template let-pes="rowData" pTemplate="body">
+  <a href="javascript:;" [pTooltip]="pes.ativo ? 'Desativar' : 'Ativar'"
+  tooltipPosition="top">
+  {{ pes.ativo ? 'Ativo' : 'Inativo' }}
+  </a>
+  </ng-template>
+  </p-column>
+  <p-column styleClass="colAcoes">
+  <ng-template pTemplate="body">
+  <a><button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></button></a>
+  <button pButton icon="fa-trash"  pTooltip="Excluir" tooltipPosition="bottom"></button>
+
+  </ng-template>
+  </p-column>
+
+</p-dataTable>
