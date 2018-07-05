@@ -1,3 +1,4 @@
+import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,20 +21,14 @@ import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { MessageComponent } from './message/message.component';
-import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    PessoasPesquisaComponent,
     FormComponent,
     MessageComponent,
-    PessoaCadastroComponent,
-    PessoasGridComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +46,8 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
     SelectButtonModule,
     DropdownModule,
 
-    LancamentosModule
+    LancamentosModule,
+    PessoasModule
   ],
   providers: [],
   bootstrap: [AppComponent]
