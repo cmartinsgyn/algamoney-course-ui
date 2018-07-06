@@ -21,14 +21,12 @@ import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FormComponent,
-    MessageComponent,
   ],
   imports: [
     BrowserModule,

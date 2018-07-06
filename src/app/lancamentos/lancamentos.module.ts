@@ -15,11 +15,14 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { InfoComponent } from './info/info.component';
+import { SharedModule } from 'primeng/components/common/shared';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+
     InputTextModule,
     ButtonModule,
     DataTableModule,
@@ -28,17 +31,20 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
 
+    SharedModule
     ],
   declarations: [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent,
-    LancamentosGridComponent
+    LancamentosGridComponent,
+    InfoComponent
   ],
   exports: [
     LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
+    LancamentosPesquisaComponent,
+    InfoComponent
   ]
 })
 export class LancamentosModule { }

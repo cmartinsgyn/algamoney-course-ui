@@ -10,10 +10,10 @@
         <label>Nome {{ nome.errors | json }}</label>
         <input type="text" pInputText name="nome"(ngModel)="nome" #nome="ngModel" required minlength="5">
 
-        <!-- <app-message [control]="nome" error="required"
+        <app-message [control]="nome" error="required"
          text="Ops! Falta o nome da pessoa."></app-message>
          <app-message [control]="nome" error="minlength"
-            text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres!"></app-message> -->
+            text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres!"></app-message>
       </div>
 
       <div class="ui-g-9 ui-fluid">
@@ -21,11 +21,11 @@
         <input type="text" pInputText name="logradouro" ngModel #logradouro="ngModel"
         required minlength="5">
 
-       <!--  <app-message [control]="logradouro" error="required"
+        <app-message [control]="logradouro" error="required"
         text="Ops!Falta o logradouro!"></app-message>
 
         <app-message [control]="logradouro" error="minlength"
-        text="Minimo de {{ logradouro.errors?.minlength?.requiredLength }}"></app-message> -->
+        text="Minimo de {{ logradouro.errors?.minlength?.requiredLength }}"></app-message>
       </div>
 
       <div class="ui-g-3 ui-fluid">
@@ -33,8 +33,8 @@
           <input type="text" pInputText name="numero" ngModel #numero="ngModel"
           required>
 
-          <!-- <app-message [control]="numero" error="required"
-          text="Ops! Falta o logradouro!"></app-message> -->
+          <app-message [control]="numero" error="required"
+          text="Ops! Falta o numero!"></app-message>
         </div>
 
         <div class="ui-g-4 ui-fluid">
@@ -42,8 +42,8 @@
           <input type="text" pInputText name="complemento" ngModel #complemento="ngModel"
            minlength="5">
 
-          <!-- <app-message [control]="complemento" error="minlength"
-          text="Minimo de {{ complemento.errors?.minlength?.requiredLength }} caracteres"></app-message> -->
+          <app-message [control]="complemento" error="minlength"
+          text="Minimo de {{ complemento.errors?.minlength?.requiredLength }} caracteres"></app-message>
         </div>
 
         <div class="ui-g-4 ui-fluid">
@@ -51,19 +51,19 @@
             <input type="text" pInputText name="bairro" ngModel #bairro="ngModel"
             required minlength="2">
 
-            <!-- <app-message [control]="bairro" error="required"
+            <app-message [control]="bairro" error="required"
             text="Ops! Falta o Bairro!"></app-message>
 
             <app-message [control]="bairro" error="minlength"
             text="Minimo de {{ bairro.errors?.minlength?.requiredLength }} caracteres"></app-message>
-  -->         </div>
+          </div>
 
           <div class="ui-g-4 ui-fluid">
             <label for="cep">CEP</label>
             <input type="text" pInputText name="cep" ngModel #cep="ngModel" required>
 
-            <!-- <app-message [control]="cep" error="required"
-            text="Ops! Falta o CEP"></app-message> -->
+            <app-message [control]="cep" error="required"
+            text="Ops! Falta o CEP"></app-message>
           </div>
 
           <div class="ui-g-6 ui-fluid">Selecione
@@ -72,19 +72,19 @@
               <input type="text" pInputText name="cidade" ngModel #cidade="ngModel"
               required minlength="2">
 
-              <!-- <app-message [control]="cidade" error="required"
+              <app-message [control]="cidade" error="required"
               text="Ops! Falta a cidade!"></app-message>
 
               <app-message [control]="cidade" error="minlength"
-              text="Minimo de {{ cidade.errors?.minlength?.requiredLength }} caracteres"></app-message> -->
+              text="Minimo de {{ cidade.errors?.minlength?.requiredLength }} caracteres"></app-message>
           </div>
           <div class="ui-g-6 ui-fluid">
               <label>Estado {{ uf.value }}</label>
               <p-dropdown [options]="estados" [autoWidth]="false" [filter]="true"
               placeholder="Selecione" ngModel #uf="ngModel" name="uf" required>Estados</p-dropdown>
 
-              <!-- <app-message [control]="uf" error="required"
-              text="Ops! Falta o Estado!"></app-message> -->
+              <app-message [control]="uf" error="required"
+              text="Ops! Falta o Estado!"></app-message>
           </div>
 
 
