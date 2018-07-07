@@ -16,7 +16,8 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { InfoComponent } from './info/info.component';
-import { SharedModule } from 'primeng/components/common/shared';
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   imports: [
