@@ -17,7 +17,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
   pesquisar() {
     this.lancamentoService.pesquisar()
-    .then(() => null);
+    .then(lancamentos => this.lancamentos = lancamentos);
   }
 
 }
