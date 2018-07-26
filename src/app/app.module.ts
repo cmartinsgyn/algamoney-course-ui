@@ -21,6 +21,8 @@ import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HttpModule } from '@angular/http';
+import { LancamentoService } from './lancamentos/lancamento.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatInputModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpModule,
 
     InputTextModule,
     ButtonModule,
@@ -47,7 +50,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     LancamentosModule,
     PessoasModule
   ],
-  providers: [],
+  providers: [LancamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
