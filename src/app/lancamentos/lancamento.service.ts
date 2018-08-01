@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
-export interface LancamentoFiltro {
+export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
+  pagina = 0;
+  itensPorPagina = 5;
 }
 
 @Injectable({
@@ -22,7 +24,10 @@ export class LancamentoService {
       const headers = new Headers();
 
       // tslint:disable-next-line:max-line-length
-      headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTMyNzI1Nzg3LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJmNGU0MDVjYy1kZTcxLTQ1NmItOGQ1YS04NTMyZGViNDVhODQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.2N98R7AhxcSa-Zl0bnk0hYrxlEvgdBZWctLTIYiIzVI');
+      headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTMzMTQ2MTYyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJjYjk4YWVjYi00NTFiLTRhY2MtOWZkNS0zZTMxNzc0MzZjMWIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.k9mmEQFzOEbneQGqivyVErHUTEcSdrwTJY86teWU9BI');
+
+      params.set('page', filtro.pagina.toString());
+      params.set('size', filtro.itensPorPagina.toString());
 
       if (filtro.descricao) {
         params.set('descricao', filtro.descricao);
@@ -41,7 +46,16 @@ export class LancamentoService {
       return this.http.get(`${this.lancamentosUrl}?resumo`,
       { headers, search: params })
       .toPromise()
-      .then(response => response.json().content);
+      .then(response => {
+        const responseJson = response.json();
+        const lancamentos = responseJson.content;
+
+        const resultado = {
+          lancamentos,
+          total: responseJson.totalElements
+        };
+      return resultado;
+    });
 
   }
 }
