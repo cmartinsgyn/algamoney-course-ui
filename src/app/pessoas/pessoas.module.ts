@@ -1,7 +1,6 @@
-import { SharedModule } from './../shared/shared.module';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
-import { PessoasPesquisaComponent } from '../pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
-import { PessoaCadastroComponent } from '../pessoas/pessoa-cadastro/pessoa-cadastro.component';
+import { SharedModule } from '../shared/shared.module';
+import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { InfoComponent } from '../lancamentos/info/info.component';
 
 import { FormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { LancamentosModule } from '../lancamentos/lancamentos.module';
-
 
 @NgModule({
   imports: [
@@ -37,8 +35,9 @@ import { LancamentosModule } from '../lancamentos/lancamentos.module';
     LancamentosModule,
     SharedModule
   ],
-  declarations: [PessoaCadastroComponent,
-    PessoasPesquisaComponent, PessoasGridComponent
+  declarations: [
+    PessoaCadastroComponent,
+    PessoasPesquisaComponent
   ],
    exports: [
      PessoaCadastroComponent,
