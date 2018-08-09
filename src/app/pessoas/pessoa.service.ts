@@ -2,9 +2,9 @@ import { PessoaFiltro } from './pessoa.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 
-export class PessoaFiltro {
- nome: string;
-}
+// export class PessoaFiltro {
+//  nome: string;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +26,5 @@ export class PessoaService {
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
   return null;
+  }
   }
