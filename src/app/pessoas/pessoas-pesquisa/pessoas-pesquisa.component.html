@@ -1,6 +1,8 @@
 <div class=container>
   <div class="ui-g">
 
+    <form (ngSubmit)="pesquisar()">
+
     <div class="ui-g-12">
       <h1>Pessoas</h1>
     </div>
@@ -9,18 +11,23 @@
     </div>
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>
-      <input type="text" pInputText>
+      <input type="text" pInputText name="nome" 
+      [(ngModel)]="filtro.nome">
     </div>
 
     <div class="ui-g-12">
       <button pButton type="submit" label="Pesquisar"></button>
     </div>
+
+   </form>  
   </div>
 
   <div class="ui-g">
     <div class="ui-g-12">
       <!-- <app-pessoas-grid [pessoas]="pessoas"></app-pessoas-grid> -->
-      <p-dataTable [value]="pessoas" [paginator]="true" [rows]="3" [rowsPerPageOptions]="[5,20,30]" [responsive]="true">
+      <p-dataTable [value]="pessoas" [paginator]="true" [rows]="filtro.itensOfPage" [lazy]="true"
+        [responsive]="true" emptyMessage="Nenhum Lançamento encontrado"
+        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
         <p-column field="nome" header="Nome"></p-column>
         <p-column field="endereco.cidade" header="Cidade"></p-column>
         <p-column field="endereco.estado" header="Estado"></p-column>
