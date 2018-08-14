@@ -1,5 +1,7 @@
-import { Injectable, Component } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
+import { Injectable } from '@angular/core';
+
+import 'rxjs/add/operator/toPromise';
 
 export class PessoaFiltro {
  nome: string;
@@ -7,12 +9,11 @@ export class PessoaFiltro {
  itensOfPage = 5;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
+
   constructor(private http: Http) { }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
@@ -20,7 +21,7 @@ export class PessoaService {
     const headers = new Headers();
 
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTMzOTQ5NzQ4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhMTIzZmM0OC0yMDFmLTQ3ZWUtOWM1MS1iZjU4OTBlZmU4MmIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0._pK_B-Sb5Uf38-bN9OXhx-yw8NBQ7AnEQC-ndOCwawE');
+    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM0MjUyNDc1LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI4MzU2MjJhOC0xZDdiLTRhOTEtODA0Ni1lY2Q5MWNmMzU5NjUiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.Y2K3jcdEMOwlLdG8ALW8c8QcqK79dGQ3F-Y7RLPXr54');
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensOfPage.toString());
@@ -46,11 +47,11 @@ export class PessoaService {
   listarTodas(): Promise<any> {
     const headers = new Headers();
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTMzOTQ5NzQ4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhMTIzZmM0OC0yMDFmLTQ3ZWUtOWM1MS1iZjU4OTBlZmU4MmIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0._pK_B-Sb5Uf38-bN9OXhx-yw8NBQ7AnEQC-ndOCwawE');
+    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM0MjUwMzkwLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIyMWU1NWZiOS0zMDRjLTQ5YjEtOTM0OS05YWYwZjliMzViMDciLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.2264el5nRJGCuMhXtPuJuHUwt51kLu7K4y3HHVCu8TA');
 
     return this.http.get(`${this.pessoasUrl}`, { headers })
     .toPromise()
     .then(response => response.json().content);
   }
 
-  }
+ }
