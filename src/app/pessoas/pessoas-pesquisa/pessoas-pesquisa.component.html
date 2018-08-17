@@ -39,11 +39,12 @@
           </ng-template>
         </p-column>
         <p-column styleClass="colAcoes">
-          <ng-template pTemplate="body">
+          <ng-template let-pess="rowData" pTemplate="body">
             <a>
               <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
             </a>
-            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="bottom"></button>
+            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="bottom"
+            (click)="excluir(pess)"></button>
 
           </ng-template>
         </p-column>

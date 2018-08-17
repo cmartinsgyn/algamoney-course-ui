@@ -25,6 +25,14 @@ export class PessoasPesquisaComponent {
     });
   }
 
+  excluir(pessoa: any) {
+  this.pessoaService.excluir(pessoa.codigo)
+  .then(() => {
+    console.log(`${pessoa.nome} excluído(a) com sucesso!`);
+  });
+
+  }
+
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);

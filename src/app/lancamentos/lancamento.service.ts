@@ -16,6 +16,8 @@ export class LancamentoFiltro {
 export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
+  // tslint:disable-next-line:max-line-length
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM0NTI0ODc1LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI5MTNmMGI1MC0wOWI0LTRlYTItOThiMi1mNWUwOWZkNjEzOTkiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.91MPgGZ_FqzCkIWtxkMwFDpRy0H5bH0Nb-CReVufobo';
 
   constructor(private http: Http) { }
 
@@ -24,7 +26,7 @@ export class LancamentoService {
       const headers = new Headers();
 
       // tslint:disable-next-line:max-line-length
-      headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTMzNTc4MzcwLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI1MWQ2NWQzZS1mMzc5LTRjYjAtOWMzYS1lZTUyZTQ3NjE4YWYiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.fhWfap0U0_n8-ejlXMwe6Sf8dBt1jssDspvRhfJ4Rr0');
+      headers.append('Authorization', this.token);
 
       params.set('page', filtro.pagina.toString());
       params.set('size', filtro.itensPorPagina.toString());
@@ -58,4 +60,14 @@ export class LancamentoService {
     });
 
   }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new Headers();
+    // tslint:disable-next-line:max-line-length
+    headers.append('Authorization', this.token);
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
+    .toPromise()
+    .then(() => null);
+
+   }
 }

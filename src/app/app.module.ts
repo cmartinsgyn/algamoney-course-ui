@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormComponent } from './formularios/form/form.component';
 import { FormsModule } from '@angular/forms';
 
+import { ToastyModule } from 'ng2-toasty';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import {ButtonModule} from 'primeng/button';
@@ -38,6 +39,7 @@ import { PessoaService } from './pessoas/pessoa.service';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    ToastyModule.forRoot(),
 
     InputTextModule,
     ButtonModule,
