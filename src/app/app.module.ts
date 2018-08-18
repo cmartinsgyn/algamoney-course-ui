@@ -19,6 +19,8 @@ import {DataTableModule} from 'primeng/datatable';
 import {CalendarModule} from 'primeng/calendar';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -49,11 +51,12 @@ import { PessoaService } from './pessoas/pessoa.service';
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
+    ConfirmDialogModule,
 
     LancamentosModule,
     PessoasModule
   ],
-  providers: [LancamentoService, PessoaService],
+  providers: [LancamentoService, PessoaService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
