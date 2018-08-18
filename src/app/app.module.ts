@@ -1,7 +1,8 @@
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , LOCALE_ID} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
 import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -27,6 +28,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HttpModule } from '@angular/http';
 import { LancamentoService } from './lancamentos/lancamento.service';
 import { PessoaService } from './pessoas/pessoa.service';
+
+
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -56,7 +61,12 @@ import { PessoaService } from './pessoas/pessoa.service';
     LancamentosModule,
     PessoasModule
   ],
-  providers: [LancamentoService, PessoaService, ConfirmationService],
+  providers: [
+    LancamentoService,
+    PessoaService,
+    ConfirmationService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
