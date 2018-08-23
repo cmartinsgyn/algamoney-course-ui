@@ -13,6 +13,8 @@ export class PessoaFiltro {
 export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
+  // tslint:disable-next-line:max-line-length
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM1MDQyNDYxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhZTFkZmU1Zi1mMDA1LTQzY2EtYTUzYi02ZWQ1YjE4OGJmOWQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.-sf4XwHhGaZ-0SaIo-dBacJyiD4RZjlBde0Sr4_5lxw';
 
   constructor(private http: Http) { }
 
@@ -20,8 +22,7 @@ export class PessoaService {
     const params = new URLSearchParams();
     const headers = new Headers();
 
-    // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM0NTEzMzczLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJiYTI2ZGYxNS0wMzNkLTRiNTYtOGEyMS1lM2EzZTJlM2YxN2EiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.R1V_8gu3jjro7c1T0HLZJCcp5eV_3I8HUDvCmuk6IE8');
+    headers.append('Authorization', this.token);
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensOfPage.toString());
@@ -47,7 +48,7 @@ export class PessoaService {
   excluir(codigo: number): Promise<void> {
     const headers = new Headers();
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM0NTEzMzczLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJiYTI2ZGYxNS0wMzNkLTRiNTYtOGEyMS1lM2EzZTJlM2YxN2EiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.R1V_8gu3jjro7c1T0HLZJCcp5eV_3I8HUDvCmuk6IE8');
+    headers.append('Authorization', this.token);
     return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
     .toPromise()
     .then(() => null);

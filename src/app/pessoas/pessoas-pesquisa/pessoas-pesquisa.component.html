@@ -26,7 +26,7 @@
     <div class="ui-g-12">
       <!-- <app-pessoas-grid [pessoas]="pessoas"></app-pessoas-grid> -->
       <p-dataTable [value]="pessoas" [paginator]="true" [rows]="filtro.itensOfPage" [lazy]="true"
-        [responsive]="true" emptyMessage="Nenhum Lançamento encontrado"
+        [responsive]="true" emptyMessage="Nenhuma pessoa encontrada" #tabela
         [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
         <p-column field="nome" header="Nome"></p-column>
         <p-column field="endereco.cidade" header="Cidade"></p-column>
@@ -44,7 +44,7 @@
               <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
             </a>
             <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="bottom"
-            (click)="excluir(pess)"></button>
+            (click)="confirmarExclusao(pess)"></button>
 
           </ng-template>
         </p-column>
