@@ -41,9 +41,8 @@ export class PessoasPesquisaComponent {
         this.excluir(pessoa);
       }
     });
- 
   }
- 
+
   excluir(pessoa: any) {
    this.pessoaService.excluir(pessoa.codigo)
    .then(() => {
