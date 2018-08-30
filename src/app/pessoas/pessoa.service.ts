@@ -14,7 +14,7 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM1MTk5MzEwLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI2YzE0YzkxOS0wNzYwLTQ1NzEtYTMzOS1hM2EzM2I3OTE5YjgiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.j55C8fHXojNTujo0adWBAFKQknrZb1rX3KLngX0vMNg';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM1NjM2MzY2LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJlM2E1ZWU5My0yNTU4LTQ3MTEtOGY2Yy02MWIxMzQ5YWQ1NjAiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.eh-9hLkFyaQ7pSDfIBGZEJZXF6_MJ1Zks-Ked6dCJw0';
 
   constructor(private http: Http) { }
 
@@ -55,10 +55,21 @@ export class PessoaService {
 
    }
 
+  mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+    const headers = new Headers();
+    headers.append('Authorization', this.token);
+    headers.append ('Content-Type', 'application/json');
+
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
+      .toPromise()
+      .then(() => null);
+ }
+
+
   listarTodas(): Promise<any> {
     const headers = new Headers();
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer ');
+    headers.append('Authorization', this.token);
 
     return this.http.get(`${this.pessoasUrl}`, { headers })
     .toPromise()

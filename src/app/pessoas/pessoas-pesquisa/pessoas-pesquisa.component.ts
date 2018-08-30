@@ -62,6 +62,20 @@ export class PessoasPesquisaComponent {
     this.pesquisar(pagina);
    }
 
+   alternarStatus(pessoa: any): void {
+     const novoStatus = !pessoa.ativo;
+
+     this.pessoaService.mudarStatus(pessoa.codigo, novoStatus)
+       .then(() => {
+         const acao = novoStatus ? 'ativada' : 'desativa';
+
+         pessoa.ativo = novoStatus;
+         this.toasty.success(`${pessoa.nome} ${acao} com sucesso`);
+
+       })
+       .catch(erro => this.errorHandler.handle(erro));
+   }
+
   /* listarTodas() {
    this.pessoaService.listarTodas()
    .then(pessoas => this.pessoas = pessoas);

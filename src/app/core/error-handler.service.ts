@@ -17,16 +17,14 @@ export class ErrorHandlerService {
 
     } else {
       let errors;
-      // deixei caso de algum erro no errors.
+      // deixei caso aconteca problema em errors.
       msg = 'Ocorreu um erro ao processar a sua solicitação';
 
         errors = errorResponse.json();
 
         msg = errors[0].mensagemUsuario;
 
-
-      console.error('Ocorreu um erro', errorResponse);
-
+        console.error('Ocorreu um erro', errorResponse);
     }
     this.toasty.error(msg);
   }
