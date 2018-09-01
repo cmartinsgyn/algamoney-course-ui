@@ -67,7 +67,7 @@ export class PessoasPesquisaComponent {
 
      this.pessoaService.mudarStatus(pessoa.codigo, novoStatus)
        .then(() => {
-         const acao = novoStatus ? 'ativada' : 'desativa';
+         const acao = novoStatus ? 'ativada' : 'desativada';
 
          pessoa.ativo = novoStatus;
          this.toasty.success(`${pessoa.nome} ${acao} com sucesso`);
