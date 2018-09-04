@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { AuthService } from '../../seguranca/auth.service';
+
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -26,11 +28,17 @@ export class LancamentoCadastroComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.carregarCategorias();
+    // this.login();
+  }
+
+  login() {
+    this.auth.login();
   }
 
   salvar(lancamentoForm: NgForm) {

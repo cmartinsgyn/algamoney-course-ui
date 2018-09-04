@@ -37,7 +37,7 @@ import { HttpModule } from '@angular/http';
     HttpModule,
 
     CoreModule,
- 
+
     InputTextModule,
     ButtonModule,
     DataTableModule,
