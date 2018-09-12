@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from '../../seguranca/auth.service';
+import { PessoaService } from '../../pessoas/pessoa.service';
 
 
 @Component({
@@ -20,20 +21,18 @@ export class LancamentoCadastroComponent implements OnInit {
 
   categorias = [];
 
-  pessoas = [
-    { label: 'João da Silva', value: 1 },
-    { label: 'Sebastião Souza', value: 2 },
-    { label: 'Maria Abadia', value: 3 }
-  ];
+  pessoas = [];
 
   constructor(
     private categoriaService: CategoriaService,
+    private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
     private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.carregarCategorias();
+    this.carregarListaPessoas();
     // this.login();
   }
 
@@ -53,6 +52,15 @@ export class LancamentoCadastroComponent implements OnInit {
         this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarListaPessoas() {
+    return this.pessoaService.listarTodas()
+    .then(pessoas => {
+      this.pessoas = pessoas.map(p => ({  label: p.nome, value: p.codigo }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+
   }
 
 }
