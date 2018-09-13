@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from '../../seguranca/auth.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
+import { Lancamento } from '../../core/model';
 
 
 @Component({
@@ -20,8 +22,8 @@ export class LancamentoCadastroComponent implements OnInit {
   ];
 
   categorias = [];
-
   pessoas = [];
+  lancamento = new Lancamento();
 
   constructor(
     private categoriaService: CategoriaService,
@@ -40,9 +42,8 @@ export class LancamentoCadastroComponent implements OnInit {
     this.auth.login();
   }
 
-  salvar(lancamentoForm: NgForm) {
-    console.log(lancamentoForm.value.nome);
-    console.log(lancamentoForm);
+  salvar(lancamentoForm: FormControl) {
+    console.log(this.lancamento);
 
   }
 
