@@ -14,7 +14,7 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2ODc1MTQxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIyYjdmNWZkZS1jNGEzLTQzOWMtOWViZi0wM2VhMzIyMTkxOGYiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0._Dd_RANPjYjuMb6hiDTzpW-w9AlYOh5VUCYZeN4W-Xg';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2OTgxMDEyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJlMzY2NmE1Yi1lMmNhLTRjMWQtYWVkZi1lN2UwNGIyOGQxMDgiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.IQfneXmleUntH0kQSLaD6IGDd2_f7e33v9m5HxKGj9s';
 
   constructor(private http: Http) { }
 
@@ -65,11 +65,11 @@ export class PessoaService {
       .then(() => null);
  }
 
-
-  listarTodas(): Promise<any> {
+// recebe token, temporariamente até impl login
+  listarTodas(tokenDropDown): Promise<any> {
     const headers = new Headers();
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', this.token);
+    headers.append('Authorization', tokenDropDown);
 
     return this.http.get(`${this.pessoasUrl}`, { headers })
     .toPromise()

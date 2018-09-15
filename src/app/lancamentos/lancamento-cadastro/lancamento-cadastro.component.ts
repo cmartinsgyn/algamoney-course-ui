@@ -24,6 +24,8 @@ export class LancamentoCadastroComponent implements OnInit {
   categorias = [];
   pessoas = [];
   lancamento = new Lancamento();
+  // tslint:disable-next-line:max-line-length
+  tokenDropDown = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2OTgxNDgyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIzMjdlNzQwNi02NDAwLTQwNjAtYjIyNS1kZDY0MDJmYjdhYzYiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.dpMGNGkf-BEowWb4yPR0bNgGhQfDuMqmx5kSWwMPCgM';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -48,7 +50,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarCategorias() {
-    return this.categoriaService.listarTodas()
+    return this.categoriaService.listarTodas(this.tokenDropDown)
       .then(categorias => {
         this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
       })
@@ -56,7 +58,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarListaPessoas() {
-    return this.pessoaService.listarTodas()
+    return this.pessoaService.listarTodas(this.tokenDropDown)
     .then(pessoas => {
       this.pessoas = pessoas.map(p => ({  label: p.nome, value: p.codigo }));
     })
