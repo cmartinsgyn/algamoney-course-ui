@@ -7,6 +7,8 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from '../../seguranca/auth.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
 import { Lancamento } from '../../core/model';
+import { LancamentoService } from '../lancamento.service';
+import { ToastyService } from 'ng2-toasty';
 
 
 @Component({
@@ -25,12 +27,14 @@ export class LancamentoCadastroComponent implements OnInit {
   pessoas = [];
   lancamento = new Lancamento();
   // tslint:disable-next-line:max-line-length
-  tokenDropDown = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2OTgxNDgyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIzMjdlNzQwNi02NDAwLTQwNjAtYjIyNS1kZDY0MDJmYjdhYzYiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.dpMGNGkf-BEowWb4yPR0bNgGhQfDuMqmx5kSWwMPCgM';
+  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2OTg0NjM4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhYTAzNzE0OC0zMzEzLTRmZTYtODIwMi00MWE3MTY2YTYwMTciLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.4OvX0RYXjZfkn0ePUmfkpLdukxa3SDtofmQRp-6cnD4';
 
   constructor(
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
+    private lancamentoService: LancamentoService,
+    private toastyService: ToastyService,
     private auth: AuthService
   ) { }
 
@@ -44,13 +48,21 @@ export class LancamentoCadastroComponent implements OnInit {
     this.auth.login();
   }
 
-  salvar(lancamentoForm: FormControl) {
-    console.log(this.lancamento);
+  salvar(form: FormControl) {
+   this.lancamentoService.adicionar(this.lancamento, this.tokenTemp)
+   .then(() => {
 
+    this.toastyService.success('Lançamento adicionado com sucesso!');
+
+    form.reset();
+    this.lancamento = new Lancamento();
+
+   })
+   .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
-    return this.categoriaService.listarTodas(this.tokenDropDown)
+    return this.categoriaService.listarTodas(this.tokenTemp)
       .then(categorias => {
         this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
       })
@@ -58,12 +70,11 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarListaPessoas() {
-    return this.pessoaService.listarTodas(this.tokenDropDown)
+    return this.pessoaService.listarTodas(this.tokenTemp)
     .then(pessoas => {
       this.pessoas = pessoas.map(p => ({  label: p.nome, value: p.codigo }));
     })
     .catch(erro => this.errorHandler.handle(erro));
 
   }
-
 }
