@@ -21,7 +21,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM1MDQyNDYxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhZTFkZmU1Zi1mMDA1LTQzY2EtYTUzYi02ZWQ1YjE4OGJmOWQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.-sf4XwHhGaZ-0SaIo-dBacJyiD4RZjlBde0Sr4_5lxw';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3MDE4NDQyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIwOWU2ZTMwNi04YmU5LTRlYjktOWNmMC03ZTlkOTA3MGUzZDIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ArCIvtLj7Wxl561tzdjQWgDybE-d2vqoB0sh-AhPC2M';
 
   constructor(private http: Http) { }
 
@@ -75,10 +75,10 @@ export class LancamentoService {
 
    }
 
-   adicionar(lancamento: Lancamento, tokenTemp): Promise<Lancamento> {
+   adicionar(lancamento: Lancamento): Promise<Lancamento> {
     const headers = new Headers();
 
-     headers.append('Authorization', tokenTemp);
+     headers.append('Authorization', this.token);
      headers.append('Content-Type', 'application/json');
 
      return this.http.post(this.lancamentosUrl,

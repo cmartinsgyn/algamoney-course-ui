@@ -1,3 +1,5 @@
+import { Pessoa } from '../core/model';
+
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -14,7 +16,7 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2OTgxMDEyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJlMzY2NmE1Yi1lMmNhLTRjMWQtYWVkZi1lN2UwNGIyOGQxMDgiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.IQfneXmleUntH0kQSLaD6IGDd2_f7e33v9m5HxKGj9s';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3MDI2NjI3LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJkNWMwNWVhZi01NjljLTRkNmMtYmZiYi00MGFkMGZjOWRjYzMiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.YB2UdS6ZrUNTTrzy_l4txQlOOL_LswScWVWAdy_jc2o';
 
   constructor(private http: Http) { }
 
@@ -74,6 +76,18 @@ export class PessoaService {
     return this.http.get(`${this.pessoasUrl}`, { headers })
     .toPromise()
     .then(response => response.json().content);
+  }
+
+  adicionar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new Headers();
+    // tslint:disable-next-line:max-line-length
+    headers.append('Authorization', this.token);
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.pessoasUrl,
+     JSON.stringify(pessoa), { headers})
+     .toPromise()
+     .then((response => response.json()));
   }
 
  }

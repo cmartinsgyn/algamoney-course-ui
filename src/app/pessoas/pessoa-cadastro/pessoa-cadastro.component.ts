@@ -1,5 +1,12 @@
+import { Pessoa } from '../../core/model';
+import { ErrorHandlerService } from './../../core/error-handler.service';
+import { PessoaService } from '../../pessoas/pessoa.service';
+import { ToastyService } from 'ng2-toasty';
+
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -143,10 +150,24 @@ export class PessoaCadastroComponent {
     label: 'Tocantins'}
   ];
 
-  salvar(pessoaForm: NgForm) {
-    console.log(pessoaForm.value.nome);
-    console.log(pessoaForm);
+  pessoa = new Pessoa();
 
+  constructor(
+    private errorHandler: ErrorHandlerService,
+    private pessoaService: PessoaService,
+    private toastyService: ToastyService,
+
+ ) { }
+
+  salvar(form: NgForm) {
+    this.pessoaService.adicionar(this.pessoa)
+    .then(() => {
+      this.toastyService.success('Lançamento adicionado com sucesso!');
+
+      form.reset();
+      this.pessoa = new Pessoa();
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
 

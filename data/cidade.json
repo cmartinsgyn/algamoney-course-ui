@@ -1,0 +1,39 @@
+{
+  "cidades": [
+    {
+      "nome": "Goiânia",
+      "id": 2,
+      "uf": "GO"
+    },
+    {
+      "nome": "Fortaleza",
+      "id": 3,
+      "uf": "CE"
+    },
+    {
+      "nome": "Vicentinopolis",
+      "id": 4,
+      "uf": "GO"
+    },
+    {
+      "nome": "Guapó",
+      "id": 6,
+      "uf": "GO"
+    },
+    {
+      "nome": "Rio de Janeiro",
+      "id": 7,
+      "uf": "RJ"
+    },
+    {
+      "nome": "Sancrerlândia",
+      "uf": "GO",
+      "id": 8
+    },
+    {
+      "nome": "Tabocas do Brejo Velho",
+      "uf": "BA",
+      "id": 9
+    }
+  ]
+}

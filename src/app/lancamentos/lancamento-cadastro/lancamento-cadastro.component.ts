@@ -27,7 +27,7 @@ export class LancamentoCadastroComponent implements OnInit {
   pessoas = [];
   lancamento = new Lancamento();
   // tslint:disable-next-line:max-line-length
-  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM2OTg0NjM4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhYTAzNzE0OC0zMzEzLTRmZTYtODIwMi00MWE3MTY2YTYwMTciLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.4OvX0RYXjZfkn0ePUmfkpLdukxa3SDtofmQRp-6cnD4';
+  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3MDE4NDQyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIwOWU2ZTMwNi04YmU5LTRlYjktOWNmMC03ZTlkOTA3MGUzZDIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ArCIvtLj7Wxl561tzdjQWgDybE-d2vqoB0sh-AhPC2M';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -49,7 +49,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
-   this.lancamentoService.adicionar(this.lancamento, this.tokenTemp)
+   this.lancamentoService.adicionar(this.lancamento)
    .then(() => {
 
     this.toastyService.success('Lançamento adicionado com sucesso!');
