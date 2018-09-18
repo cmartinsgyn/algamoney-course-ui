@@ -1,3 +1,5 @@
+import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
@@ -22,6 +24,14 @@ import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
+import { Routes } from '@angular/router';
+
+
+
+const router: Routes [
+{path: 'lancamentos', component:LancamentoCadastroComponent},
+{path: 'lancamentos/novo', component:LancamentosPesquisaComponent
+];
 
 @NgModule({
   declarations: [
