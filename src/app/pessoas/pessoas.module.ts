@@ -16,11 +16,13 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
   CommonModule,
     FormsModule,
+    RouterModule,
 
     InputTextModule,
     ButtonModule,

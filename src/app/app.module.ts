@@ -1,8 +1,11 @@
-import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
+import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
+import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
+import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule , LOCALE_ID} from '@angular/core';
 import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -10,6 +13,9 @@ import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormComponent } from './formularios/form/form.component';
 import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+import { HttpModule } from '@angular/http';
+import { Routes, RouterModule } from '@angular/router';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -22,15 +28,11 @@ import {CalendarModule} from 'primeng/calendar';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 
-import { AppComponent } from './app.component';
-import { HttpModule } from '@angular/http';
-import { Routes } from '@angular/router';
-
-
-
-const router: Routes [
-{path: 'lancamentos', component:LancamentoCadastroComponent},
-{path: 'lancamentos/novo', component:LancamentosPesquisaComponent
+const routes: Routes = [
+{ path: 'lancamentos/novo', component: LancamentoCadastroComponent },
+{ path: 'lancamentos', component: LancamentosPesquisaComponent },
+{ path: 'pessoas/novo', component: PessoaCadastroComponent },
+{ path: 'pessoas', component: PessoasPesquisaComponent },
 ];
 
 @NgModule({
@@ -39,12 +41,13 @@ const router: Routes [
     FormComponent,
   ],
   imports: [
-    BrowserModule,
+BrowserModule,
     AlertModule.forRoot(),
     MatInputModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(routes),
 
     CoreModule,
 
