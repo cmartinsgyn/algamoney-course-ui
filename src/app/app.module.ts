@@ -30,6 +30,7 @@ import {DropdownModule} from 'primeng/dropdown';
 
 const routes: Routes = [
 { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
+{ path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
 { path: 'lancamentos', component: LancamentosPesquisaComponent },
 { path: 'pessoas/novo', component: PessoaCadastroComponent },
 { path: 'pessoas', component: PessoasPesquisaComponent },

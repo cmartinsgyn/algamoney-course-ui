@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -27,7 +28,7 @@ export class LancamentoCadastroComponent implements OnInit {
   pessoas = [];
   lancamento = new Lancamento();
   // tslint:disable-next-line:max-line-length
-  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3Mzk2MDk2LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJjMzI4MmMwYi04NDJlLTRiMDItOWQwNC0xMDc2ZjEyOTE1ZGQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.kaGgi68oSsbBoSHFXibotAUFVXbL32QcefKicW9FuKY';
+  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3NjI0MDM0LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJkZWZkODlkZi1iZGY2LTQxYWItYmNjNS02ZWU3ODg4MmM5OWEiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.FaiHvcpA4qmmROxh4cTGqP5GfoEALWm-PpfzSgYgJhY';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -35,12 +36,14 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private lancamentoService: LancamentoService,
     private toastyService: ToastyService,
-    private auth: AuthService
+    private auth: AuthService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.carregarCategorias();
     this.carregarListaPessoas();
+    console.log(this.route.snapshot.params['codigo']);
     // this.login();
   }
 
