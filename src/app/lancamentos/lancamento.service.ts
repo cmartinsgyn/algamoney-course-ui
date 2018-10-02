@@ -21,7 +21,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4MTA2MTAxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJlYTFiZmNkZi0zYmE0LTQxYmYtOTk0Yy02NTVlZTI0ZDk4ZWYiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.QewZQGfcj6PN8PX5nAovhZohullRYd6cUbLeIYIBi2w';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NDUwMzQ1LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI2OGYwMDE4OC04ZWI2LTQ5NmQtYTU2Yy03YmRkNzRjZTA2NmUiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.hnAIZzoE0sy1jKFVEw-SkSwyFoFUT0FC--08iR1o_RE';
 
   constructor(private http: Http) { }
 
@@ -85,6 +85,26 @@ export class LancamentoService {
          JSON.stringify(lancamento), { headers })
        .toPromise()
        .then(response => response.json());
+   }
+
+   atualizar(lancamento: Lancamento): Promise<Lancamento> {
+     const headers = new Headers();
+
+     headers.append('Authorization', this.token);
+     headers.append('Content-Type', 'application/json');
+
+     return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,
+      JSON.stringify(lancamento), { headers })
+    .toPromise()
+    .then(response => {
+      const lancamentoAlterado = response.json() as Lancamento;
+
+      this.converterStringsParaDatas([lancamento]);
+
+      return lancamentoAlterado;
+
+    });
+
    }
 
    buscarPorCodigo(codigo: number): Promise<Lancamento> {
