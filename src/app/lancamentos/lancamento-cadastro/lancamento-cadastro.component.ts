@@ -27,8 +27,9 @@ export class LancamentoCadastroComponent implements OnInit {
   categorias = [];
   pessoas = [];
   lancamento = new Lancamento();
+  titulo = String;
   // tslint:disable-next-line:max-line-length
-  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NDUwMzQ1LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI2OGYwMDE4OC04ZWI2LTQ5NmQtYTU2Yy03YmRkNzRjZTA2NmUiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.hnAIZzoE0sy1jKFVEw-SkSwyFoFUT0FC--08iR1o_RE';
+  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NTM2MDc0LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIzODZlNDdkMC1jNTYzLTRiMWMtODA2Mi04MDBkNmU0Y2QzZDMiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ZmVwJ8dHb_FfXlq8TXQcQKES6ioM9rpXB7YWy4GT6EA';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -43,12 +44,27 @@ export class LancamentoCadastroComponent implements OnInit {
   ngOnInit() {
     this.carregarCategorias();
     this.carregarListaPessoas();
-    console.log(this.route.snapshot.params['codigo']);
+    const codigoLancamento = this.route.snapshot.params['codigo'];
     // this.login();
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
   }
 
   login() {
     this.auth.login();
+  }
+
+  carregarLancamento(codigo: number) {
+      this.lancamentoService.buscarPorCodigo(codigo)
+       .then(lancamento => {
+       this.lancamento = lancamento;
+       })
+       .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar(form: FormControl) {
