@@ -21,7 +21,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NTM4NjQyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJkNWViYjE1OC05NjE4LTQ1MTctYWJiNC0xYTg3ZjQzZDQ1ZWYiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.HmPITnzF7mv2NQLqhRlRrc2DU5cG91oWWVEjJSXUFwA';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NTkyNjQyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIxZTEzNTIxNC01NmM5LTRiZTUtOWI1NC02YWY4NzQxODVhNmUiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ThOoCiMbKRID5G-7R22siSGZJj7uXhYutaaHyBW7IDA';
 
   constructor(private http: Http) { }
 
@@ -75,7 +75,8 @@ export class LancamentoService {
 
    }
 
-   adicionar(lancamento: Lancamento): Promise<Lancamento> {
+   /*na aula tem um método separado(adicionar e alterar) mas nesse caso fiz um só por usar o hibernate*/
+   salvar(lancamento: Lancamento): Promise<Lancamento> {
     const headers = new Headers();
 
      headers.append('Authorization', this.token);
