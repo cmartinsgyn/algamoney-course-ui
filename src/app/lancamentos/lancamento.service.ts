@@ -88,25 +88,25 @@ export class LancamentoService {
        .then(response => response.json());
    }
 
-   atualizar(lancamento: Lancamento): Promise<Lancamento> {
-     const headers = new Headers();
+  //  atualizar(lancamento: Lancamento): Promise<Lancamento> {
+  //    const headers = new Headers();
 
-     headers.append('Authorization', this.token);
-     headers.append('Content-Type', 'application/json');
+  //    headers.append('Authorization', this.token);
+  //    headers.append('Content-Type', 'application/json');
 
-     return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,
-      JSON.stringify(lancamento), { headers })
-    .toPromise()
-    .then(response => {
-      const lancamentoAlterado = response.json() as Lancamento;
+  //    return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,
+  //     JSON.stringify(lancamento), { headers })
+  //   .toPromise()
+  //   .then(response => {
+  //     const lancamentoAlterado = response.json() as Lancamento;
 
-      this.converterStringsParaDatas([lancamento]);
+  //     this.converterStringsParaDatas([lancamento]);
 
-      return lancamentoAlterado;
+  //     return lancamentoAlterado;
 
-    });
+  //   });
 
-   }
+  //  }
 
    buscarPorCodigo(codigo: number): Promise<Lancamento> {
     const headers = new Headers();
