@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -29,7 +29,7 @@ export class LancamentoCadastroComponent implements OnInit {
   lancamento = new Lancamento();
   titulo = String;
   // tslint:disable-next-line:max-line-length
-  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NTkyNjQyLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIxZTEzNTIxNC01NmM5LTRiZTUtOWI1NC02YWY4NzQxODVhNmUiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ThOoCiMbKRID5G-7R22siSGZJj7uXhYutaaHyBW7IDA';
+  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4Njc4Mjc4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI2MWMzMGEwYS0zMDkyLTQwNTctYWFhOC0xOGFhNWE2ZTk0NjgiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.0R-L8gc7-EmMeObbxu4rBpGAMYk4n96UoQ10sHzMF6E';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -38,7 +38,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private toastyService: ToastyService,
     private auth: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -69,13 +70,14 @@ export class LancamentoCadastroComponent implements OnInit {
 
   salvar(form: FormControl) {
    this.lancamentoService.salvar(this.lancamento)
-   .then(() => {
+   .then((lancamentoAdicionado) => {
 
     this.toastyService.success('Lançamento salvo com sucesso!');
 
     if (!this.editando) {
-    form.reset();
-    this.lancamento = new Lancamento();
+    // form.reset();
+    // this.lancamento = new Lancamento();
+    this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
     }
 
    })
@@ -97,5 +99,13 @@ export class LancamentoCadastroComponent implements OnInit {
     })
     .catch(erro => this.errorHandler.handle(erro));
 
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+    setTimeout(() => {
+      this.lancamento = new Lancamento();
+        }, 1);
+    this.router.navigate(['/lancamentos/novo']);
   }
 }
