@@ -10,6 +10,7 @@ import { PessoaService } from '../../pessoas/pessoa.service';
 import { Lancamento } from '../../core/model';
 import { LancamentoService } from '../lancamento.service';
 import { ToastyService } from 'ng2-toasty';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class LancamentoCadastroComponent implements OnInit {
   lancamento = new Lancamento();
   titulo = String;
   // tslint:disable-next-line:max-line-length
-  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4Nzk3MjMxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJjZjU5ZjhiNi00OTQxLTRiZjYtOTUyNS1hZTUwOTAxMWE4MjUiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.C_vAiAuwi8yCQ_i6nlnTCG03GUL6TvGXmaIGRmX77jk';
+  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4ODM3ODA3LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJhMWJjNzhjMy1mNWUzLTRmN2UtOGRhYy02OGIzOWMyYTRlOGQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.zvSi5UILftLavpRNBqbzV7AaYB6rEuTCwgePfixKuvg';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -39,7 +40,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private toastyService: ToastyService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class LancamentoCadastroComponent implements OnInit {
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
     }
+    this.title.setTitle('Novo Lançamento');
   }
 
   get editando() {
@@ -64,6 +67,7 @@ export class LancamentoCadastroComponent implements OnInit {
       this.lancamentoService.buscarPorCodigo(codigo)
        .then(lancamento => {
        this.lancamento = lancamento;
+       this.atualizarTituloEdicao();
        })
        .catch(erro => this.errorHandler.handle(erro));
   }
@@ -75,9 +79,9 @@ export class LancamentoCadastroComponent implements OnInit {
     this.toastyService.success('Lançamento salvo com sucesso!');
 
     if (!this.editando) {
-    // form.reset();
-    // this.lancamento = new Lancamento();
-    this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
+       this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
+    } else {
+       this.atualizarTituloEdicao();
     }
 
    })
@@ -107,5 +111,9 @@ export class LancamentoCadastroComponent implements OnInit {
       this.lancamento = new Lancamento();
         }, 1);
     this.router.navigate(['/lancamentos/novo']);
+  }
+
+  atualizarTituloEdicao() {
+      this.title.setTitle(`Edição Lançamento: ${this.lancamento.descricao}`);
   }
 }
