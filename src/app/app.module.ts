@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './app.routing.module';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
@@ -11,35 +12,11 @@ import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.compo
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule , LOCALE_ID} from '@angular/core';
 import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
-import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormComponent } from './formularios/form/form.component';
-import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
-import { Routes, RouterModule } from '@angular/router';
-
-import { CurrencyMaskModule } from 'ng2-currency-mask';
-
-import {ButtonModule} from 'primeng/button';
-import { InputTextModule } from 'primeng/components/inputtext/inputtext';
-import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
-import {TooltipModule} from 'primeng/components/tooltip/tooltip';
-import {DataTableModule} from 'primeng/datatable';
-import {CalendarModule} from 'primeng/calendar';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {DropdownModule} from 'primeng/dropdown';
-
-const routes: Routes = [
-{ path: '', redirectTo: 'lancamentos', pathMatch: 'full'},
-{ path: 'lancamentos/novo', component: LancamentoCadastroComponent },
-{ path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
-{ path: 'lancamentos', component: LancamentosPesquisaComponent },
-{ path: 'pessoas/novo', component: PessoaCadastroComponent },
-{ path: 'pessoas', component: PessoasPesquisaComponent },
-{ path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
-{ path: '**', redirectTo:'pagina-nao-encontrada'}
-];
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,30 +24,17 @@ const routes: Routes = [
     FormComponent,
   ],
   imports: [
-BrowserModule,
-    AlertModule.forRoot(),
-    MatInputModule,
+    BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes),
-
-    InputTextModule,
-    ButtonModule,
-    DataTableModule,
-    TooltipModule,
-    InputTextareaModule,
-    CalendarModule,
-    SelectButtonModule,
-    DropdownModule,
+    FormsModule,
 
     CoreModule,
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+    AppRoutingModule
   ],
-  providers: [
-
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

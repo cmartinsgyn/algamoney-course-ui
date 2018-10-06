@@ -15,13 +15,13 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { Title } from '@angular/platform-browser';
+import { CategoriaService } from '../categorias/categoria.service';
 
 registerLocaleData(localePt);
 
 @NgModule({
   imports: [
-
-  CommonModule,
+    CommonModule,
     RouterModule,
 
     ToastyModule.forRoot(),
@@ -38,6 +38,8 @@ registerLocaleData(localePt);
     ErrorHandlerService,
     LancamentoService,
     PessoaService,
+    CategoriaService,
+
     ConfirmationService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
