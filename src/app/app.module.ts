@@ -5,6 +5,8 @@ import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pes
 import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
+
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule , LOCALE_ID} from '@angular/core';
@@ -29,11 +31,14 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 
 const routes: Routes = [
+{ path: '', redirectTo: 'lancamentos', pathMatch: 'full'},
 { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
 { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
 { path: 'lancamentos', component: LancamentosPesquisaComponent },
 { path: 'pessoas/novo', component: PessoaCadastroComponent },
 { path: 'pessoas', component: PessoasPesquisaComponent },
+{ path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
+{ path: '**', redirectTo:'pagina-nao-encontrada'}
 ];
 
 @NgModule({
@@ -50,8 +55,6 @@ BrowserModule,
     HttpModule,
     RouterModule.forRoot(routes),
 
-    CoreModule,
-
     InputTextModule,
     ButtonModule,
     DataTableModule,
@@ -61,6 +64,7 @@ BrowserModule,
     SelectButtonModule,
     DropdownModule,
 
+    CoreModule,
     LancamentosModule,
     PessoasModule
   ],

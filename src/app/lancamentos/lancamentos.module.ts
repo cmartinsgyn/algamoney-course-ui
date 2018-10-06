@@ -42,8 +42,6 @@ import { RouterModule } from '@angular/router';
     InfoComponent
   ],
   exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent,
     InfoComponent
   ]
 })

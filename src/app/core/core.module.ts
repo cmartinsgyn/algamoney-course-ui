@@ -13,6 +13,8 @@ import { RouterModule } from '@angular/router';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+
 registerLocaleData(localePt);
 
 @NgModule({
@@ -25,7 +27,7 @@ registerLocaleData(localePt);
     ConfirmDialogModule,
 
   ],
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
   exports: [
     NavbarComponent,
     ToastyModule,
