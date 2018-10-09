@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
-
 const routes: Routes = [
     { path: 'pessoas/novo', component: PessoaCadastroComponent },
     { path: 'pessoas/:codigo', component: PessoaCadastroComponent },

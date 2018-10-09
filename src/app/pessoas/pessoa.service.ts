@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 export class PessoaFiltro {
  nome: string;
  pagina = 0;
- itensOfPage = 5;
+ itensPorPagina = 5;
 }
 
 @Injectable()
@@ -16,7 +16,7 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
   // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM5MDU0Njc4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI3ZjY1N2ZkMy1kODU1LTQ1ZWMtOTRlYS04NDdkYWRkNTRhNzEiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.AfpXsS3sIr2TePpGDp4TONDG5H_PlMScxTiO89_mkCo';
+  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM5MDkyOTMzLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJjMDY3M2JkMi0yOGNiLTRiMDgtODdiNy1lY2M4YmRmMTQwN2QiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0._USqTcgOkNXeo4HB57k2KcrkpbkU7o-2zYM_nYHny9A';
 
   constructor(private http: Http) { }
 
@@ -27,7 +27,7 @@ export class PessoaService {
     headers.append('Authorization', this.token);
 
     params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensOfPage.toString());
+    params.set('size', filtro.itensPorPagina.toString());
 
     if (filtro.nome) {
       params.set('nome', filtro.nome);
@@ -45,6 +45,19 @@ export class PessoaService {
      };
      return resultadoPessoa;
    });
+  }
+
+  buscarPorCodigo(codigo: number): Promise<Pessoa> {
+    const headers = new Headers();
+    headers.append('Authorization', this.token);
+
+    return this.http.get(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then(response => {
+        const pessoa = response.json() as Pessoa;
+
+        return pessoa;
+      });
   }
 
   excluir(codigo: number): Promise<void> {

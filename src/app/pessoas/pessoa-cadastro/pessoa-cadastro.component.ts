@@ -5,6 +5,7 @@ import { ToastyService } from 'ng2-toasty';
 
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -13,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './pessoa-cadastro.component.html',
   styleUrls: ['./pessoa-cadastro.component.css']
 })
-export class PessoaCadastroComponent {
+export class PessoaCadastroComponent implements OnInit{
 
   estados = [{
     value: 'AC',
@@ -156,8 +157,27 @@ export class PessoaCadastroComponent {
     private errorHandler: ErrorHandlerService,
     private pessoaService: PessoaService,
     private toastyService: ToastyService,
+    private route: ActivatedRoute,
+    private router: Router
 
  ) { }
+
+ ngOnInit(): void {
+  const codigoPessoa = this.route.snapshot.params['codigo'];
+
+  if (codigoPessoa) {
+    this.carregarPessoa(codigoPessoa);
+  }
+}
+
+carregarPessoa(codigo: number) {
+  this.pessoaService.buscarPorCodigo(codigo)
+   .then(pessoa => {
+   this.pessoa = pessoa;
+   // this.atualizarTituloEdicao();
+   })
+   .catch(erro => this.errorHandler.handle(erro));
+}
 
   salvar(form: NgForm) {
     this.pessoaService.adicionar(this.pessoa)

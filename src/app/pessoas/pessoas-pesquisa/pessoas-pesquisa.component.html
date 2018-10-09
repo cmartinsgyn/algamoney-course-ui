@@ -1,66 +1,62 @@
-<div class=container>
+<div class="container">
   <div class="ui-g">
 
-    <form (ngSubmit)="pesquisar()">
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-    <div class="ui-g-12">
-      <h1>Pessoas</h1>
-    </div>
-    <div>
-      <app-info>info</app-info>
-    </div>
-    <div class="ui-g-12 ui-fluid">
-      <label>Nome</label>
-      <input type="text" pInputText name="nome" 
-      [(ngModel)]="filtro.nome">
-    </div>
+      <div class="ui-g-12">
+        <h1>Pessoas</h1>
+      </div>
 
-    <div class="ui-g-12">
-      <button pButton type="submit" label="Pesquisar"></button>
-    </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
 
-   </form>  
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
+
   </div>
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <!-- <app-pessoas-grid [pessoas]="pessoas"></app-pessoas-grid> -->
-      <p-dataTable [value]="pessoas" [paginator]="true" [rows]="filtro.itensOfPage" [lazy]="true"
-        [responsive]="true" emptyMessage="Nenhuma pessoa encontrada" #tabela
-        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
-        <p-column field="nome" header="Nome"></p-column>
-        <p-column field="endereco.cidade" header="Cidade"></p-column>
-        <p-column field="endereco.estado" header="Estado"></p-column>
-        <p-column field="status" header="Status">
-          <ng-template let-pes="rowData" pTemplate="body">
-            <a href="javascript:;" [pTooltip]="pes.ativo ? 'Desativar' : 'Ativar'" tooltipPosition="top"
-            (click)="alternarStatus(pes)">
-              {{ pes.ativo ? 'Ativo' : 'Inativo' }}
-            </a>
-          </ng-template>
-        </p-column>
-        <p-column styleClass="colAcoes">
-          <ng-template let-pess="rowData" pTemplate="body">
-            <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"
-            [routerLink]="pessoa">
-             </button>
-              
-            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="bottom"
-            (click)="confirmarExclusao(pess)"></button>
-
-          </ng-template>
-        </p-column>
-
+      <p-dataTable [value]="pessoas" [responsive]="true"
+        emptyMessage="Nenhuma pessoa encontrada"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+          <p-column field="nome" header="Nome"></p-column>
+          <p-column field="endereco.cidade" header="Cidade"></p-column>
+          <p-column field="endereco.estado" header="Estado"></p-column>
+          <p-column field="ativo" header="Status">
+            <ng-template let-pes="rowData" pTemplate="body">
+                <a href="javascript:;"
+                    [pTooltip]="pes.ativo ? 'Desativar' : 'Ativar'"
+                    tooltipPosition="top"
+                    (click)="alternarStatus(pes)">
+                  {{ pes.ativo ? 'Ativo' : 'Inativo' }}
+                </a>
+            </ng-template>
+          </p-column>
+          <p-column styleClass="col-acoes">
+            <ng-template let-pes="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil"
+                pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/pessoas', pes.codigo]"></a>
+              <button pButton icon="fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(pes)"></button>
+            </ng-template>
+          </p-column>
       </p-dataTable>
-
     </div>
+
     <div class="ui-g-12">
-      <a>
-        <button pButton label="Nova Pessoa" routerLink="/pessoas/novo"></button>
-      </a>
+      <a pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
     </div>
-
   </div>
-
 
 </div>

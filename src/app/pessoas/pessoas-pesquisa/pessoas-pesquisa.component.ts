@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
 import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
-
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 
 @Component({
@@ -17,12 +17,12 @@ export class PessoasPesquisaComponent {
   pessoas = [];
   @ViewChild('tabela') grid;
 
- constructor(
-   private pessoaService: PessoaService,
-   private toasty: ToastyService,
-   private confirmation: ConfirmationService,
-   private errorHandler: ErrorHandlerService
-  ) {}
+  constructor(
+    private pessoaService: PessoaService,
+    private toasty: ToastyService,
+    private confirmation: ConfirmationService,
+    private errorHandler: ErrorHandlerService,
+    ) {}
 
  pesquisar(pagina = 0) {
    this.filtro.pagina = pagina;
