@@ -1,11 +1,14 @@
+import { Lancamento } from './../../core/model';
 import { Pessoa } from '../../core/model';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
 import { ToastyService } from 'ng2-toasty';
 
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { ThrowStmt } from '@angular/compiler';
 
 
 
@@ -14,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './pessoa-cadastro.component.html',
   styleUrls: ['./pessoa-cadastro.component.css']
 })
-export class PessoaCadastroComponent implements OnInit{
+export class PessoaCadastroComponent implements OnInit {
 
   estados = [{
     value: 'AC',
@@ -158,37 +161,59 @@ export class PessoaCadastroComponent implements OnInit{
     private pessoaService: PessoaService,
     private toastyService: ToastyService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
 
  ) { }
 
  ngOnInit(): void {
   const codigoPessoa = this.route.snapshot.params['codigo'];
+  if (codigoPessoa) {
+    this.title.setTitle('Nova Pessoa');
+  }
 
   if (codigoPessoa) {
     this.carregarPessoa(codigoPessoa);
   }
 }
 
+get editando() {
+ return Boolean(this.pessoa.codigo);
+}
+
 carregarPessoa(codigo: number) {
   this.pessoaService.buscarPorCodigo(codigo)
    .then(pessoa => {
    this.pessoa = pessoa;
-   // this.atualizarTituloEdicao();
+   this.atualizarTituloEdicao();
    })
    .catch(erro => this.errorHandler.handle(erro));
 }
 
   salvar(form: NgForm) {
     this.pessoaService.adicionar(this.pessoa)
-    .then(() => {
-      this.toastyService.success('Lançamento adicionado com sucesso!');
+    .then((pessoaAdicionada) => {
+      this.toastyService.success('Lançamento salvo com sucesso!');
 
-      form.reset();
-      this.pessoa = new Pessoa();
+      if (!this.editando) {
+      this.router.navigate(['pessoas', pessoaAdicionada.codigo]);
+      } else {
+        this.atualizarTituloEdicao();
+      }
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
 
+  novo(form: FormControl) {
+    form.reset();
+    setTimeout(() => {
+       this.pessoa = new Pessoa();
+    }, 1);
+    this.router.navigate(['pessoas/novo']);
+  }
+
+  atualizarTituloEdicao() {
+   this.title.setTitle(`Edição de Pessoa: ${this.pessoa.nome}`);
+  }
 
 }
