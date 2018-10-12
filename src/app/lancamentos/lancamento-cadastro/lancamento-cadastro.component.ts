@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { AuthService } from '../../seguranca/auth.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
 import { Lancamento } from '../../core/model';
 import { LancamentoService } from '../lancamento.service';
@@ -37,7 +36,6 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private lancamentoService: LancamentoService,
     private toastyService: ToastyService,
-    private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private title: Title
@@ -47,7 +45,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarCategorias();
     this.carregarListaPessoas();
     const codigoLancamento = this.route.snapshot.params['codigo'];
-    // this.login();
+
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
     }
@@ -58,11 +56,7 @@ export class LancamentoCadastroComponent implements OnInit {
     return Boolean(this.lancamento.codigo);
   }
 
-  login() {
-    this.auth.login();
-  }
-
-  carregarLancamento(codigo: number) {
+   carregarLancamento(codigo: number) {
       this.lancamentoService.buscarPorCodigo(codigo)
        .then(lancamento => {
        this.lancamento = lancamento;
