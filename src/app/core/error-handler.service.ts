@@ -14,18 +14,11 @@ export class ErrorHandlerService {
 
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
-
     } else {
-      let errors;
-      // deixei caso aconteca problema em errors.
-      msg = 'Ocorreu um erro ao processar a sua solicitação';
-
-        errors = errorResponse.json();
-
-        msg = errors[0].mensagemUsuario;
-
-        console.error('Ocorreu um erro', errorResponse);
+      msg = 'Erro ao processar serviço remoto. Tente novamente.';
+      console.error('Ocorreu um erro', errorResponse);
     }
+
     this.toasty.error(msg);
   }
 

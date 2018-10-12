@@ -16,7 +16,6 @@ import { InfoComponent } from './info/info.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { SharedModule } from '../shared/shared.module';
-import { RouterModule } from '@angular/router';
 import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 @NgModule({
