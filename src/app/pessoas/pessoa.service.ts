@@ -1,6 +1,7 @@
 import { Pessoa } from '../core/model';
 
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -15,16 +16,11 @@ export class PessoaFiltro {
 export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
-  // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM5MjA4NTM0LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI5YWVhYjk2NC1hZTM1LTQwNGEtOTY3ZS1kMzkwYWI1NGJkMzEiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.o1oNgn3cpCkxkRAiaaNrKsgP6tQaMOFrEz5xlhSnGdQ';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
     const params = new URLSearchParams();
-    const headers = new Headers();
-
-    headers.append('Authorization', this.token);
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
@@ -33,7 +29,7 @@ export class PessoaService {
       params.set('nome', filtro.nome);
     }
 
-   return this.http.get(`${this.pessoasUrl}`, {headers, search: params})
+   return this.http.get(`${this.pessoasUrl}`, {search: params})
    .toPromise()
    .then(response => {
      const responseJson = response.json();
@@ -48,10 +44,7 @@ export class PessoaService {
   }
 
   buscarPorCodigo(codigo: number): Promise<Pessoa> {
-    const headers = new Headers();
-    headers.append('Authorization', this.token);
-
-    return this.http.get(`${this.pessoasUrl}/${codigo}`, { headers })
+     return this.http.get(`${this.pessoasUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const pessoa = response.json() as Pessoa;
@@ -61,44 +54,30 @@ export class PessoaService {
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new Headers();
-    // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', this.token);
-    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`)
     .toPromise()
     .then(() => null);
 
    }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    const headers = new Headers();
-    headers.append('Authorization', this.token);
-    headers.append ('Content-Type', 'application/json');
 
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo)
       .toPromise()
       .then(() => null);
  }
 
 // recebe token, temporariamente até impl login
-  listarTodas(tokenDropDown): Promise<any> {
-    const headers = new Headers();
-    // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', tokenDropDown);
+  listarTodas(): Promise<any> {
 
-    return this.http.get(`${this.pessoasUrl}`, { headers })
+     return this.http.get(`${this.pessoasUrl}`)
     .toPromise()
     .then(response => response.json().content);
   }
 
   adicionar(pessoa: Pessoa): Promise<Pessoa> {
-    const headers = new Headers();
-    // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', this.token);
-    headers.append('Content-Type', 'application/json');
-
     return this.http.post(this.pessoasUrl,
-     JSON.stringify(pessoa), { headers})
+     JSON.stringify(pessoa))
      .toPromise()
      .then((response => response.json()));
   }

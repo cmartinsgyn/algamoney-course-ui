@@ -27,10 +27,7 @@ export class LancamentoCadastroComponent implements OnInit {
   pessoas = [];
   lancamento = new Lancamento();
   titulo = String;
-  // tslint:disable-next-line:max-line-length
-  tokenTemp = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM5MDkwODAwLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIxMzljMWQ4Ny1hNmIzLTQ5NjctOTA5NC0yMzVmNTFhYzlkYmQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.QhsbanH-xXbEVLPRZnydl_uthql6PQyXeiFmYdet1xM';
-
-  constructor(
+   constructor(
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
@@ -82,7 +79,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarCategorias() {
-    return this.categoriaService.listarTodas(this.tokenTemp)
+    return this.categoriaService.listarTodas()
       .then(categorias => {
         this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
       })
@@ -90,7 +87,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarListaPessoas() {
-    return this.pessoaService.listarTodas(this.tokenTemp)
+    return this.pessoaService.listarTodas()
     .then(pessoas => {
       this.pessoas = pessoas.map(p => ({  label: p.nome, value: p.codigo }));
     })

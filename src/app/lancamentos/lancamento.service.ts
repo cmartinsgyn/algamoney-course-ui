@@ -1,7 +1,8 @@
 import { Lancamento } from './../core/model';
 
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { Headers, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
@@ -20,17 +21,11 @@ export class LancamentoFiltro {
 export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
-  // tslint:disable-next-line:max-line-length
-  token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM5MjAzOTY3LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJmODk3ZTkzZi1iZTU4LTRmOTQtOWFkOC01MmQ0ZDk0MzYyZjMiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.6xcjql7w3HvSjb-YN28JqKO24a7pQh-rEj6QqzPpISs';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
       const params = new URLSearchParams();
-      const headers = new Headers();
-
-      // tslint:disable-next-line:max-line-length
-      headers.append('Authorization', this.token);
 
       params.set('page', filtro.pagina.toString());
       params.set('size', filtro.itensPorPagina.toString());
@@ -50,7 +45,7 @@ export class LancamentoService {
       }
 
       return this.http.get(`${this.lancamentosUrl}?resumo`,
-      { headers, search: params })
+      { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -66,10 +61,7 @@ export class LancamentoService {
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new Headers();
-    // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', this.token);
-    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
+     return this.http.delete(`${this.lancamentosUrl}/${codigo}`)
     .toPromise()
     .then(() => null);
 
@@ -79,13 +71,13 @@ export class LancamentoService {
    salvar(lancamento: Lancamento): Promise<Lancamento> {
     const headers = new Headers();
 
-     headers.append('Authorization', this.token);
-     headers.append('Content-Type', 'application/json');
+    // ver header.
+    headers.append('Content-Type', 'application/json');
 
-     return this.http.post(this.lancamentosUrl,
-         JSON.stringify(lancamento), { headers })
-       .toPromise()
-       .then(response => response.json());
+    return this.http.post(this.lancamentosUrl,
+        JSON.stringify(lancamento), { headers })
+      .toPromise()
+      .then(response => response.json());
    }
 
   //  atualizar(lancamento: Lancamento): Promise<Lancamento> {
@@ -109,10 +101,7 @@ export class LancamentoService {
   //  }
 
    buscarPorCodigo(codigo: number): Promise<Lancamento> {
-    const headers = new Headers();
-    headers.append('Authorization', this.token);
-
-    return this.http.get(`${this.lancamentosUrl}/${codigo}`, { headers })
+      return this.http.get(`${this.lancamentosUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const lancamento = response.json() as Lancamento;

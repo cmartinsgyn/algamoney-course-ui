@@ -193,7 +193,7 @@ carregarPessoa(codigo: number) {
   salvar(form: NgForm) {
     this.pessoaService.adicionar(this.pessoa)
     .then((pessoaAdicionada) => {
-      this.toastyService.success('Lançamento salvo com sucesso!');
+      this.toastyService.success('Pessoa salva com sucesso!');
 
       if (!this.editando) {
       this.router.navigate(['pessoas', pessoaAdicionada.codigo]);
