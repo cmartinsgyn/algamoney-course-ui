@@ -32,7 +32,10 @@ registerLocaleData(localePt);
     ConfirmDialogModule,
 
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
+  declarations: [
+     NavbarComponent,
+     PaginaNaoEncontradaComponent,
+     NaoAutorizadoComponent],
   exports: [
     NavbarComponent,
     ToastyModule,

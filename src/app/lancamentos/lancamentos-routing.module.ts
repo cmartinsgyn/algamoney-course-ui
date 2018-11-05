@@ -9,7 +9,7 @@ const routes: Routes = [
     { path: 'lancamentos/novo',
      component: LancamentoCadastroComponent,
      canActivate: [AuthGuard],
-     data: { roles: ['ROLE_PESQUISAR_LANCAMENTO'] }
+     data: { roles: ['ROLE_CADASTRAR_LANCAMENTO'] }
     },
     { path: 'lancamentos/:codigo',
      component: LancamentoCadastroComponent,
@@ -19,8 +19,8 @@ const routes: Routes = [
     { path: 'lancamentos',
      component: LancamentosPesquisaComponent,
      canActivate: [AuthGuard],
-     data: { roles: ['ROLE_CADASTRAR_LANCAMENTO'] }
-    },
+     data: { roles: ['ROLE_PESQUISAR_LANCAMENTO'] }
+    }
 
     ];
 
