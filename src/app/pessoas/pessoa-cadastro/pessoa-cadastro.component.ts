@@ -8,9 +8,6 @@ import { NgForm, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { ThrowStmt } from '@angular/compiler';
-
-
 
 @Component({
   selector: 'app-pessoa-cadastro',

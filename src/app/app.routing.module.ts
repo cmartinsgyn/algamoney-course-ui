@@ -1,3 +1,4 @@
+import { FormComponent } from './formularios/form/form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'nao-autorizado', component: NaoAutorizadoComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
+  { path: 'form', component: FormComponent },
   { path: '**', redirectTo: 'pagina-nao-encontrada' }
 ];
 
