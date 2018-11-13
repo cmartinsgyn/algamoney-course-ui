@@ -9,13 +9,15 @@ import { environment } from 'src/environments/environment';
 })
 export class LogoutService {
 
-  tokensRevokeUrl: string; 
+  tokensRevokeUrl: string;
 
   constructor(
     private http: AuthHttp,
     private auth: AuthService
 
-    ) { this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`}
+    ) {
+      this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
+    }
 
     logout () {
       return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })

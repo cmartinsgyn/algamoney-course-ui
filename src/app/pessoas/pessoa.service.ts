@@ -18,7 +18,7 @@ export class PessoaService {
 
   pessoasUrl: string;
 
-  constructor(private http: AuthHttp) { 
+  constructor(private http: AuthHttp) {
     this.pessoasUrl = `${environment.apiUrl}/pessoas`;
   }
 
