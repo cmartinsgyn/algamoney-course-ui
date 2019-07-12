@@ -33,8 +33,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/nao-autorizado']);
       return false;
     }
-
     return true;
   }
 
-}
+} // end

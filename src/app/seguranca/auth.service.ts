@@ -24,6 +24,7 @@ export class AuthService {
 
   login(usuario: string, senha: string): Promise<void> {
 
+    // tslint:disable-next-line: deprecation
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA=='); // senha de acesso a app na classe do back end
@@ -49,6 +50,7 @@ export class AuthService {
   }
 
   obterNovoAccessToken() {
+    // tslint:disable-next-line: deprecation
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');

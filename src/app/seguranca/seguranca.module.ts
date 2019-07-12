@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { LogoutService } from './logout.service';
 
+// tslint:disable-next-line: deprecation
 export function authHttpServiceFactory(auth: AuthService, http: Http, options: RequestOptions) {
   const config = new AuthConfig({
     globalHeaders: [
@@ -40,6 +41,7 @@ export function authHttpServiceFactory(auth: AuthService, http: Http, options: R
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
+      // tslint:disable-next-line: deprecation
       deps: [AuthService, Http, RequestOptions]
     },
     AuthGuard,
