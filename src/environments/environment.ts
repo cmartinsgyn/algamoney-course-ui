@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://algamoney-api-cms.herokuapp.com'
+  apiUrl: 'http://localhost:8080'
 };
-
-// http://localhost:8080
 
 /*
  * In development mode, to ignore zone related error stack frames such as
