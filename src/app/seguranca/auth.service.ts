@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Http, Headers } from '@angular/http';
-import { environmentProd } from 'src/environments/environmentProd';
+import { environment } from 'src/environments/environment';
 
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/toPromise';
@@ -14,10 +14,11 @@ export class AuthService {
   jwtPayload: any;
 
   constructor(
+    // tslint:disable-next-line: deprecation
     private http: Http,
     private jwtHelper: JwtHelper
     ) {
-      this.oauthTokenUrl = `${environmentProd.apiUrl}/oauth/token`;
+      this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
       this.carregarToken();
     }
 
